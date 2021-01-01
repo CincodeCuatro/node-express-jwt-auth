@@ -1,0 +1,101 @@
+<%- include('partials/header'); -%>
+<script src ="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
+integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<div class="row">
+  <div class="col">
+    <div class="card card-body">
+      <input id="search-input" class="form control" type="text">
+      
+    </div>
+  </div>
+</div>
+
+<table class="table table-striped">
+  <tr class="bg-info">
+    <th class="bg-info" data-column="first" data-order="desc">First &#9650</th>
+    <th data-column="Last" data-order="desc">Last &#9650</th>
+    <th data-column="email" data-order="desc">Email &#9650</th>
+  </tr>
+  <tbody id="myTable">
+  </tbody>
+</table>
+
+<script>
+  var myArray = []
+
+  $('th').on('click', function(){
+    var column = $(this).data('column')
+    var order = $(this).data('order')
+    var text = $(this).html()
+    text = text.substring(0, text.length -1)
+    console.log('clicked', column, order)
+
+    if (order == 'desc') {
+      $(this).data('order', 'asc')
+      myArray = myArray.sort((a,b) => a[column] > b[column] ? 1 : -1)
+      text+= '&#9660'
+    }else{
+      $(this).data('order', 'desc')
+      myArray = myArray.sort((a,b) => a[column] < b[column] ? 1 : -1)
+      text+= '&#9650'
+    }
+    $(this).html(text)
+    buildTable(myArray)
+  })
+
+  $('#search-input').on('keyup', function(){
+    var value = $(this).val()
+    console.log('Value:', value)
+    var data = searchTable(value, myArray);
+    buildTable(data)
+  })
+
+  $.ajax({
+    method: 'GET', 
+    url:'https://reqres.in/api/users',
+    success:function(response){
+      myArray = response.data
+      buildTable(myArray)
+      console.log(myArray)
+    }
+  })
+
+  function searchTable(value, data){
+    var filteredData = []
+
+    for (var i = 0; i < data.length; i++) {
+     // console.log(data[i])
+      value = value.toLowerCase();
+      var first_name = data[i].first_name.toLowerCase();
+
+      if (first_name.includes(value)) {
+        filteredData.push(data[i])
+      }
+    }
+
+    return filteredData
+  }
+
+  function buildTable(data){
+    var table = document.getElementById('myTable')
+    
+    table.innerHTML = ''
+    
+    for (var i = 0; i < data.length; i++) {
+      var row = `<tr>
+                    <td>${data[i].first_name}</td>
+                    <td>${data[i].last_name}</td>
+                    <td>${data[i].email}</td>
+					      </tr>`
+
+    table.innerHTML += row
+
+    }
+  }
+</script>
+
+<%- include('partials/footer'); -%>
+
