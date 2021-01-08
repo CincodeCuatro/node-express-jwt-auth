@@ -1,0 +1,51 @@
+<%- include('partials/header'); -%>
+
+<form>
+  <h2>Ask a question</h2>
+  <label for="question">Question</label>
+  <input type="text" name="question" required />
+ 
+
+  <label for="category">Choose a category:</label>
+<select id="category" name="category">
+  <option value="student-life">Student Life</option>
+  <option value="science">Science</option>
+  <option value="art">Art</option>
+  <option value="mathematics">Mathematics</option>
+</select>
+
+  <button>Submit</button>
+</form>>
+
+<script>
+  const form = document.querySelector('form');
+
+  form.addEventListener('submit', async (e)=> {
+        e.preventDefault();
+        
+        //get values
+        const question = form.question.value;
+        const category = form.category.value;
+
+        console.log({question, category});
+
+        try {
+          const res = await fetch('/university', {
+                method: 'POST',
+                body: JSON.stringify({question, category}),
+                headers: { 'Content-Type': 'application/json' }
+            });
+          const data = await res.json();
+          console.log(data);
+        } catch (error) {
+          console.error(error)
+        }
+
+  });
+</script>
+
+
+
+<%- include('partials/footer'); -%>
+
+

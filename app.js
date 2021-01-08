@@ -15,6 +15,7 @@ app.use(cookieParser());
 app.set('view engine', 'ejs');
 
 // database connection
+//how to hide this from git?
 const dbURI = 'mongodb+srv://michael:test1234@cluster0.dauir.mongodb.net/node-auth';
 mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex:true })
   .then((result) => app.listen(3000))
@@ -23,14 +24,11 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true, useCr
 // routes
 app.get('*', checkUser); //the means it * applies to all get requests
 app.get('/', (req, res) => res.render('home'));
-app.get('/smoothies', requireAuth, (req, res) => res.render('smoothies'));
+app.get('/university', requireAuth, (req, res) => res.render('university')); //for the page behind the login
 app.get('/qa', requireAuth, (req, res) => res.render('qa'));
 app.use(authRoutes);
 
 
-
-//continue on number 14
-//https://youtu.be/9N7uqbuODqs?list=PL4cUxeGkcC9iqqESP8335DA5cRFp8loyp
 
 
 

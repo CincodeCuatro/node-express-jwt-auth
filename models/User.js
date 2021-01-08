@@ -15,6 +15,7 @@ const userSchema = new mongoose.Schema({
         required: [true, 'Please enter a password'],
         minlength: [8, 'The minimum password length is 8 characters']
     },
+
 });
 
 //used in hashing
@@ -47,6 +48,18 @@ userSchema.statics.login = async function(email, password) {
         throw Error('password does not match');
     }
     throw Error('email does not exist');
+}
+
+//COPY OF static method to login user
+userSchema.statics.getUserData = async function(userId) {
+    
+    const user = await this.findById(userId); //destructuring javascript
+    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment
+    
+    if (user) {
+        return {email: user.email};
+    }
+    throw Error('user does not exist');
 }
 
 const User = mongoose.model('user', userSchema) //must be the singular form for DB
