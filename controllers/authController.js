@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 
 const jwtSecret = 'uni app secret';
 
+//controller talks to database tells backend what to do
 //error handling
 const handleErrors = (err) => {
     console.log(err.message,err.code);
@@ -109,6 +110,23 @@ module.exports.question_post = async (req, res) => {
         return res.status(400).send('error, question not created');
     }
 }
+
+//note to self: executed when the end point is accessed
+module.exports.question_get = async (req, res) => {
+    console.log("question_get");
+
+     try {
+         //const dbRes = await Question.ques({});
+         const questions = await Question.getAllQuestions();
+       // console.log(questions);
+         return res.status(201).json(questions);
+     }
+     catch (err) {
+         console.log(err);
+         return res.status(400).send('error, question not created');
+     }
+ }
+
 
 // question_get
 // Question.getAll???

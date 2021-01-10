@@ -2,14 +2,76 @@
 
 <header>
   <div class="smoothie">
-    <img src="/smoothie.png" alt="">
+   <!-- <img src="/image.png" alt=""> -->
   </div>
   <div class="headings">
     <h2>Smoothie Recipes</h2>
     <h3>By Ninjas For Ninjas</h3>
-    <a href="/university" class="btn">View Recipes</a>
+    <a href="/ask" class="btn">Ask Question</a>
   </div>
 </header>
 
+<table>
+  <thead>Author</thead>
+  <thead>Question</thead>
+  <thead>Category</thead>
+  <thead>Answer Count</thead>
+  
+  <tbody>
+    <td>bla</td>
+  </tbody>
+</table>
+
+<table class="table table-striped">
+  <tr class="bg-info">
+    <th class="bg-info" data-column="first" data-order="desc">Author &#9650</th>
+    <th data-column="Last" data-order="desc">Question &#9650</th>
+    <th data-column="email" data-order="desc">Category &#9650</th>
+  </tr>
+  <tbody id="myTable">
+  </tbody>
+</table>
+
+<script>
+
+
+async function fetchQuestions(){
+  try {
+          const res = await fetch('/question', {
+                method: 'GET',
+                headers: { 'Content-Type': 'application/json' }
+            });
+          const data = await res.json();
+          console.log(data);
+          return data;
+        } catch (error) {
+          console.error(error)
+        }
+  }
+
+  function buildTable(data){
+    var table = document.getElementById('myTable')
+    
+    table.innerHTML = ''
+    
+    for (var i = 0; i < data.length; i++) {
+      var row = `<tr>
+                    <td>${data[i].author}</td>
+                    <td>${data[i].question}</td>
+                    <td>${data[i].category}</td>
+					      </tr>`
+
+    table.innerHTML += row
+    }
+  }
+
+  async function displayQuestions(){
+    const questions = await fetchQuestions();
+    buildTable(questions);
+  }
+
+
+ displayQuestions();
+</script>
 
 <%- include('partials/footer'); -%>

@@ -24,11 +24,11 @@ const questionSchema = new mongoose.Schema({
 
 // ge
 
-//COPY OF static method to login user
-questionSchema.statics.getQuestions = async function() {
+questionSchema.statics.getAllQuestions = async function() {
     //get and return all questions from mongo DB
-    const questions = await this.GETALL?!?!?!
+    const questions = await this.find({});
 
+    console.log(questions)
     if (questions) {
         return questions;
     }
