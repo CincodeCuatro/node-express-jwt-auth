@@ -15,13 +15,12 @@ const userSchema = new mongoose.Schema({
         unique: true,
         lowercase: true,
         validate: [isEmail, 'Please enter a valid email address'] //uses validator (3rd party) returns true or false
-    },
+    }, 
     password: {
         type: String,
         required: [true, 'Please enter a password'],
         minlength: [8, 'The minimum password length is 8 characters']
     },
-
 });
 
 //used in hashing
@@ -39,7 +38,6 @@ userSchema.pre('save',async function(next) {
     const salt = await bcrypt.genSalt();
     this.password = await bcrypt.hash(this.password, salt);
     next();
-
 })
 
 //static method to login user

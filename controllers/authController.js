@@ -90,47 +90,4 @@ module.exports.logout_get = (req, res) => {
     res.redirect('/');
 }
 
-//post Question //todo - author, question, category (from dropdown)
-module.exports.question_post = async (req, res) => {
-   console.log(req.body);
-  
-    const { id: userId } = jwt.verify(req.cookies.jwt, jwtSecret);
-    console.log(userId);
 
-    const { question, category } = req.body// JSON.parse(req.body);
-    console.log(question)
-  
-    try {
-        const user = await User.getUserData(userId);
-        const dbRes = await Question.create( { question, category, author: user.username });
-        return res.status(201);
-    }
-    catch (err) {
-        console.log(err);
-        return res.status(400).send('error, question not created');
-    }
-}
-
-//note to self: executed when the end point is accessed
-module.exports.question_get = async (req, res) => {
-    console.log("question_get");
-
-     try {
-         //const dbRes = await Question.ques({});
-         const questions = await Question.getAllQuestions();
-       // console.log(questions);
-         return res.status(201).json(questions);
-     }
-     catch (err) {
-         console.log(err);
-         return res.status(400).send('error, question not created');
-     }
- }
-
-
-// question_get
-// Question.getAll???
-// const questions = await Question.getQuestions();
-// return res.status(201).json(questions);
-//https://www.npmjs.com/package/mongoose
-//https://masteringjs.io/tutorials/mongoose/find-by-id

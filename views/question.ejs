@@ -1,0 +1,68 @@
+<%- include('partials/header'); -%>
+<header>
+  <div class="smoothie">
+  </div>
+  <div class="headings">
+    <h2>Question</h2>
+    <p><%= question.author %></p>
+    <p><%= question.question %></p>
+
+    <ul>
+        <% for(let answer of question.answers){%>
+            <li> Name:<%= answer.author %> answer:<%= answer.answer %> </li>
+     <% }; %> 
+    </ul>
+    
+    
+   <!--   <a href="/ask" class="btn">Answer Question</a> -->
+  </div>
+
+</header>
+
+
+<form>
+    <h2>Answer question</h2>
+    <label for="answer">Answer</label>
+    <input type="text" name="answer" required />
+   
+  
+  
+    <button>Submit</button>
+  </form>>
+  
+  <script>
+    const form = document.querySelector('form');
+    form.addEventListener('submit', async (e)=> {
+          e.preventDefault();
+          
+          //get values
+
+            const payload = {
+                questionId: window.location.pathname.split("/")[2],
+                answer: form.answer.value
+            }
+           
+          //const answer = form.answer.value;
+          //const category = question.category;
+  
+          //console.log({question, category});
+  
+          try {
+            const res = await fetch('/answer', {
+                  method: 'POST',
+                  body: JSON.stringify(payload),
+                  headers: { 'Content-Type': 'application/json' }
+              });
+            const data = await res.json();
+            
+            console.log(data);
+
+          } catch (error) {
+            console.error(error)
+          }
+  
+    });
+  </script>
+
+
+<%- include('partials/footer'); -%>

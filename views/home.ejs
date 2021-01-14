@@ -13,15 +13,68 @@
 
 <table class="table table-striped">
   <tr class="bg-info">
-    <th class="bg-info" data-column="first" data-order="desc">Author &#9650</th>
-    <th data-column="Last" data-order="desc">Question &#9650</th>
-    <th data-column="email" data-order="desc">Category &#9650</th>
+    <th class="bg-info" data-column="first" data-order="desc">Author</th>
+    <th data-column="Last" data-order="desc">Question</th>
+    <th data-column="email" data-order="desc">Category</th>
+    <th data-column="answercount" data-order="desc">Count</th>
   </tr>
   <tbody id="questionTable">
   </tbody>
 </table>
 
 <script>
+
+
+async function fetchQuestions(){
+  //destructure page and limit and set default values
+  //const { page = 1, limit = 5 } = req.query;
+
+  try {
+          const res = await fetch('/question', {
+                method: 'GET',
+                headers: { 'Content-Type': 'application/json' }
+            });
+            
+          const data = await res.json();
+          console.log(data);
+          return data;
+        } catch (error) {
+          console.error(error)
+        }
+  }
+
+  function buildTable(data){
+    var table = document.getElementById('questionTable')
+    
+    table.innerHTML = ''
+    
+    for (var i = 0; i < data.length; i++) {
+      var row = `<tr ">
+                      <td>${data[i].author}</td>
+                      <td>
+                        <a href="/question/${data[i]._id}">${data[i].question}</a>
+                      </td>
+                      <td>${data[i].category}</td>
+                      <td>${data[i].answerCount}</td>
+					      </tr>`
+
+    table.innerHTML += row
+    }
+  }
+
+  async function displayQuestions(){
+    const questions = await fetchQuestions();
+    buildTable(questions);
+  }
+
+
+ displayQuestions();
+</script>
+
+<%- include('partials/footer'); -%>
+
+<!-- backup of original 3:40 pm - 1/14/2020
+
 
 
 async function fetchQuestions(){
@@ -63,4 +116,6 @@ async function fetchQuestions(){
  displayQuestions();
 </script>
 
-<%- include('partials/footer'); -%>
+
+
+-->
