@@ -51,13 +51,13 @@ module.exports.login_get = (req,res) => {
 }
 
 module.exports.signup_post = async (req,res) => {
-    //console.log(email, password);
+   // console.log( email, password);
    // res.send('new signup');
 
-    const {email, password } = req.body;
+    const {username, email, password } = req.body;
 
     try {
-        const user = await User.create({ email, password }); //asynchronus
+        const user = await User.create({ username, email, password }); //asynchronus
         const token = createToken(user._id); //uses UID given by mongoDB
         res.cookie('jwt', token, { httpOnly: true , maxAge : maxAge * 1000 });
         res.status(201).json({ user: user._id }); //201 success

@@ -3,6 +3,12 @@ const { isEmail } = require('validator');
 const bcrypt = require('bcrypt');
 
 const userSchema = new mongoose.Schema({
+    
+    username: {
+        type: String,
+        required: [true, 'Please enter a username'],
+        minlength: [4, 'The minimum username length is 4 characters'],
+    },
     email: {
         type: String,
         required: [true, 'Please enter a valid e-mail address'],
@@ -50,7 +56,7 @@ userSchema.statics.login = async function(email, password) {
     throw Error('email does not exist');
 }
 
-//COPY OF static method to login user
+//getUserData finds email/username by userId
 userSchema.statics.getUserData = async function(userId) {
     
     const user = await this.findById(userId); //destructuring javascript
