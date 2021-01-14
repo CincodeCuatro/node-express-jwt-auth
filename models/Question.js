@@ -20,9 +20,6 @@ const questionSchema = new mongoose.Schema({
 
 });
 
-//post question
-
-// ge
 
 questionSchema.statics.getAllQuestions = async function() {
     //get and return all questions from mongo DB

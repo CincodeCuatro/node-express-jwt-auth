@@ -17,7 +17,7 @@
     <th data-column="Last" data-order="desc">Question &#9650</th>
     <th data-column="email" data-order="desc">Category &#9650</th>
   </tr>
-  <tbody id="myTable">
+  <tbody id="questionTable">
   </tbody>
 </table>
 
@@ -39,7 +39,7 @@ async function fetchQuestions(){
   }
 
   function buildTable(data){
-    var table = document.getElementById('myTable')
+    var table = document.getElementById('questionTable')
     
     table.innerHTML = ''
     
