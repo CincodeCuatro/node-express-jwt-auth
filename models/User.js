@@ -63,7 +63,7 @@ userSchema.statics.getUserData = async function(userId) {
     // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment
     
     if (user) {
-        return {email: user.email};
+        return {username: user.username};
     }
     throw Error('user does not exist');
 }

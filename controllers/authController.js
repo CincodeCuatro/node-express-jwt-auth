@@ -102,7 +102,7 @@ module.exports.question_post = async (req, res) => {
   
     try {
         const user = await User.getUserData(userId);
-        const dbRes = await Question.create( { question, category, author: user.email });
+        const dbRes = await Question.create( { question, category, author: user.username });
         return res.status(201);
     }
     catch (err) {
