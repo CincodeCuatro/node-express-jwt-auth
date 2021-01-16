@@ -18,7 +18,7 @@ app.set('view engine', 'ejs');
 //how to hide this from git?
 const dbURI = 'mongodb+srv://michael:test1234@cluster0.dauir.mongodb.net/node-auth';
 mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex:true })
-  .then((result) => app.listen(3000))
+  .then((result) => app.listen(process.env.PORT || 3000))
   .catch((err) => console.log(err));
 
 // routes
