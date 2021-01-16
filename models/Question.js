@@ -29,7 +29,6 @@ questionSchema.statics.getAllQuestions = async function() {
     //get and return all questions from mongo DB
     const questions = await this.find({});
 
-    console.log(questions)
     if (questions) {
         return questions;
     }

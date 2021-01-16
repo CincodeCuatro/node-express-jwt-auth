@@ -16,5 +16,6 @@ router.post('/ask', questionController.question_post);
 router.get('/question', questionController.question_get);
 router.get('/question/:questionId', questionController.get_single_question);
 router.post('/answer', questionController.post_answer);
-
+router.get('/question-page/:index', questionController.question_get_page);
+router.get('/question-page', questionController.question_get_page);
 module.exports = router;

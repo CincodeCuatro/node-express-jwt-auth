@@ -9,7 +9,7 @@ module.exports.question_post = async (req, res) => {
    
      const { id: userId } = jwt.verify(req.cookies.jwt, jwtSecret);
      console.log(userId);
- 
+
      const { question, category } = req.body;// JSON.parse(req.body);
      console.log(question)
    
@@ -76,10 +76,10 @@ module.exports.question_post = async (req, res) => {
         const { answer, questionId } = req.body;
         const payload = { 
             answers: [
-                {
+                { 
                     author: username,
                     answer,
-                }
+                } 
             ]
             };
 
@@ -92,41 +92,50 @@ module.exports.question_post = async (req, res) => {
      }
  }
 
-/*
-//Attempt of 'simple' pagination - result: caused buildTable in home.ejs to not find 'length'
-module.exports.question_get = async (req, res) => {
-    const { page = 1, limit = 5 } = req.query;
-    console.log("question_get");
-    
 
+//Attempt of 'simple' pagination 
+module.exports.question_get_page = async (req, res) => {
+    //const { page = 1, limit = 5 } = req.query;
+
+    const limit = 5;
+    const page = req.params.index || 1;
+    console.log("question_get_page");
+     
+ 
      try {
-         //const dbRes = await Question.ques({});
-         const questions = await Question.getAllQuestions()
-            .limit( limit * 1)
-            .skip((page -1) * limit)
-            .exec();
+         await Question.find({})
+         .skip((limit * page) - limit)
+         .limit(limit)
+         .exec(function(err, questions) {
+            Question.count().exec(function(err, count) {
+                if (err) return next(err);
 
-            //get total documents in the Questions collection
-            const count = await Question.countDocuments();
-       // console.log(questions);
-       
-       //return response with questions, total pages, and current page
-        return res.json({
-            questions,
-            totalPages: Math.ceil(count / limit),
-            currentPage: page
-        });
-        //  return res.status(201).json(questions);
+                const payload = questions.map((question) => ({
+                    author: question.author,
+                    category: question.category,
+                    question: question.question,
+                    answerCount: question.answers.length,
+                    _id: question._id
+                }));
+ 
+                res.render('home', {
+                    questions: JSON.stringify(payload),
+                    current: page,
+                    totalPages: Math.ceil(count / limit)
+                })
+            })
+        });       
+        
      }
      catch (err) {
          console.log(err);
-         return res.status(400).send('error, question not created');
+         return res.status(400).send(err.message);
      }
  }
 
-*/
 
 
+ 
 /*
 //backup question_get
 

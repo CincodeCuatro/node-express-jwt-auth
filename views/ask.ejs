@@ -17,6 +17,17 @@
   <button>Submit</button>
 </form>>
 
+<table class="table table-striped">
+  <tr class="bg-info">
+    <th class="bg-info" data-column="first" data-order="desc">Author</th>
+    <th data-column="Last" data-order="desc">Question</th>
+    <th data-column="email" data-order="desc">Category</th>
+    <th data-column="answercount" data-order="desc">Count</th>
+  </tr>
+  <tbody id="questionTable">
+  </tbody>
+</table>
+
 <script>
   const form = document.querySelector('form');
 

@@ -24,9 +24,6 @@
     <h2>Answer question</h2>
     <label for="answer">Answer</label>
     <input type="text" name="answer" required />
-   
-  
-  
     <button>Submit</button>
   </form>>
   
@@ -38,7 +35,8 @@
           //get values
 
             const payload = {
-                questionId: window.location.pathname.split("/")[2],
+                //questionId: window.location.pathname.split("/")[2],
+                questionId: '<%= question._id %>',
                 answer: form.answer.value
             }
            

@@ -10,7 +10,6 @@
   </div>
 </header>
 
-
 <table class="table table-striped">
   <tr class="bg-info">
     <th class="bg-info" data-column="first" data-order="desc">Author</th>
@@ -22,34 +21,26 @@
   </tbody>
 </table>
 
+
+<% for (let i = 1; i <= totalPages; i++) { %>
+  <button type="button"><a href="/question-page/<%- i -%>">Page <%- i -%></a></button>
+<% } %>
+
+
+
 <script>
 
+  console.log('pages: <%- JSON.stringify(totalPages) -%>');
 
-async function fetchQuestions(){
-  //destructure page and limit and set default values
-  //const { page = 1, limit = 5 } = req.query;
-
-  try {
-          const res = await fetch('/question', {
-                method: 'GET',
-                headers: { 'Content-Type': 'application/json' }
-            });
-            
-          const data = await res.json();
-          console.log(data);
-          return data;
-        } catch (error) {
-          console.error(error)
-        }
-  }
+  console.log('current: <%- JSON.stringify(current) -%>');
 
   function buildTable(data){
-    var table = document.getElementById('questionTable')
+    const table = document.getElementById('questionTable')
     
     table.innerHTML = ''
     
     for (var i = 0; i < data.length; i++) {
-      var row = `<tr ">
+      const row = `<tr>
                       <td>${data[i].author}</td>
                       <td>
                         <a href="/question/${data[i]._id}">${data[i].question}</a>
@@ -63,7 +54,8 @@ async function fetchQuestions(){
   }
 
   async function displayQuestions(){
-    const questions = await fetchQuestions();
+    //const questions = await fetchQuestions();
+    const questions = JSON.parse('<%- questions -%>');
     buildTable(questions);
   }
 
