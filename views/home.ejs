@@ -21,11 +21,11 @@
   </tbody>
 </table>
 
-
-<% for (let i = 1; i <= totalPages; i++) { %>
-  <button type="button"><a href="/question-page/<%- i -%>">Page <%- i -%></a></button>
-<% } %>
-
+<ul class="pagination">
+  <% for (let i = 1; i <= totalPages; i++) { %>
+    <li> <a href="/question-page/<%- i -%>"><%- i -%></a></li>
+  <% } %>
+</ul>
 
 
 <script>
