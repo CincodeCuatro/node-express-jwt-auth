@@ -10,7 +10,7 @@ body{
 h1, h2, h3, h4, ul, li, a, p, input, label, button, div, footer{
   margin: 0;
   padding: 0;
-  font-family: 'Quicksand', sans-serif;
+  font-family: 'Baloo Thambi 2';
   color: #444;
 }
 ul{
@@ -83,7 +83,7 @@ button{
  
 }
 .error{
-  color: #ff0099;
+  color: #c7aebd;
   margin: 10px 2px;
   font-size: 0.8em;
   font-weight: bold;
@@ -121,6 +121,12 @@ footer{
   color: #aaa;
 }
 
+table {
+
+  border-collapse: collapse;
+  
+
+}
 td {
   border: 1px solid #ddd;
   padding: 8px;
@@ -128,6 +134,7 @@ td {
 }
 
 th {
+  padding: 5px;
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: left;
@@ -171,7 +178,7 @@ background-color: navy;
 color: white; 
 border: 1px solid rgb(255, 255, 255); 
 } 
-ul.pagination li a:hover:not(.active) {color: white; background-color: #4CAF50;} 
+ul.pagination li a:hover:not(.active) {color: white; background-color: #cc0bb2;} 
 
 .pagination2 {
   display: flex;
@@ -180,3 +187,14 @@ ul.pagination li a:hover:not(.active) {color: white; background-color: #4CAF50;}
 }
 
 
+#button-box {
+ text-align: center;
+
+} #button-box .btn{
+  margin-top: 20px;
+  padding: 12px 18px;
+  text-transform: uppercase;
+  font-weight: bold;
+  display: inline-block;
+  font-size: 0.8em;
+}

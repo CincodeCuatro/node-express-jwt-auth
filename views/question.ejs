@@ -3,13 +3,12 @@
   <div class="uni-main">
   </div>
   <div class="headings">
-    <h2>Question</h2>
-    <p><%= question.author %></p>
+    <h2><%= question.author %>'s Question</h2>
     <p><%= question.question %></p>
-
+<br>
     <ul>
         <% for(let answer of question.answers){%>
-            <li> Name:<%= answer.author %> answer:<%= answer.answer %> </li>
+            <li><%= answer.author %>'s answer: <%= answer.answer %> </li>
      <% }; %> 
     </ul>
     
