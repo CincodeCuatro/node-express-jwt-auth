@@ -6,17 +6,14 @@ const jwtSecret = 'uni app secret'; //this is bad because it's duplicated (also 
 //post Question //todo - author, question, category (from dropdown)
 module.exports.question_post = async (req, res) => {
     console.log(req.body);
-   
      const { id: userId } = jwt.verify(req.cookies.jwt, jwtSecret);
      console.log(userId);
-
      const { question, category } = req.body;// JSON.parse(req.body);
-     console.log(question)
-   
+
      try {
          const user = await User.getUserData(userId);
          const dbRes = await Question.create( { question, category, author: user.username });
-         return res.status(201);
+        return res.status(201).json({ questionId: dbRes._id });
      }
      catch (err) {
          console.log(err);
@@ -58,7 +55,6 @@ module.exports.question_post = async (req, res) => {
     
      try {
          const question = await Question.getSingleQuestion(req.params.questionId);
-         console.log(question)
          res.render('question', { question });
      }
      catch(err) {
@@ -71,8 +67,7 @@ module.exports.question_post = async (req, res) => {
      console.log("post answer");
      try {
         const { id: userId } = jwt.verify(req.cookies.jwt, jwtSecret);
-        const {username} = await User.getUserData(userId);
-        console.log(username)
+        const { username } = await User.getUserData(userId);
         const { answer, questionId } = req.body;
         const payload = { 
             answers: [
@@ -84,24 +79,22 @@ module.exports.question_post = async (req, res) => {
             };
 
         const dbRes = await Question.findOneAndUpdate({_id: questionId  }, { $push: payload } );
-        console.log(dbRes);
-        return res.status(200);
+        console.log("done posting answer");
+        return res.status(200).send("OK");
      }
      catch(err) {
          console.error(err);
      }
  }
 
-
 //Attempt of 'simple' pagination 
 module.exports.question_get_page = async (req, res) => {
     //const { page = 1, limit = 5 } = req.query;
 
     const limit = 5;
-    const page = req.params.index || 1;
+    const page = req.params.index ? req.params.index : 1;
     console.log("question_get_page");
      
- 
      try {
          await Question.find({})
          .skip((limit * page) - limit)

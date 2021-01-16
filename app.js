@@ -23,7 +23,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true, useCr
 
 // routes
 app.get('*', checkUser); //the means it * applies to all get requests
-app.get('/', (req, res) => res.render('home'));
+//app.get('/', (req, res) => res.render('home'));
 app.get('/ask', requireAuth, (req, res) => res.render('ask')); //for the page behind the login
 app.get('/qa', requireAuth, (req, res) => res.render('qa'));
 app.use(authRoutes);

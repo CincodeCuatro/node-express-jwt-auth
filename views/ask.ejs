@@ -5,7 +5,6 @@
   <label for="question">Question</label>
   <input type="text" name="question" required />
  
-
   <label for="category">Choose a category:</label>
 <select id="category" name="category">
   <option value="student-life">Student Life</option>
@@ -15,18 +14,7 @@
 </select>
 
   <button>Submit</button>
-</form>>
-
-<table class="table table-striped">
-  <tr class="bg-info">
-    <th class="bg-info" data-column="first" data-order="desc">Author</th>
-    <th data-column="Last" data-order="desc">Question</th>
-    <th data-column="email" data-order="desc">Category</th>
-    <th data-column="answercount" data-order="desc">Count</th>
-  </tr>
-  <tbody id="questionTable">
-  </tbody>
-</table>
+</form>
 
 <script>
   const form = document.querySelector('form');
@@ -41,13 +29,14 @@
         console.log({question, category});
 
         try {
-          const res = await fetch('/ask', {
+          const response = await fetch('/ask', {
                 method: 'POST',
                 body: JSON.stringify({question, category}),
                 headers: { 'Content-Type': 'application/json' }
             });
-          const data = await res.json();
-          console.log(data);
+            const { questionId } = await response.json();
+            window.location.href = `/question/${questionId}`;
+
         } catch (error) {
           console.error(error)
         }

@@ -170,3 +170,9 @@ color: white;
 border: 1px solid rgb(255, 255, 255); 
 } 
 ul.pagination li a:hover:not(.active) {color: white; background-color: #4CAF50;} 
+
+.pagination2 {
+  display: flex;
+  gap: 12px;
+  
+}

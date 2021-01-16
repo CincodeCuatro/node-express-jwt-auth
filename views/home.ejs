@@ -23,10 +23,18 @@
 
 <ul class="pagination">
   <% for (let i = 1; i <= totalPages; i++) { %>
-    <li> <a href="/question-page/<%- i -%>"><%- i -%></a></li>
+    <li> <a href="/<%- i -%>"><%- i -%></a></li>
   <% } %>
-</ul>
 
+</ul>
+<div class="pagination2">
+  <% if(current > 1){ %>
+    <button type="button"><a href="/<%- current - 1 -%>">Prev</a></button>
+  <% } %>
+  <% if(current < totalPages) { %>
+    <button type="button"><a href="/<%- parseInt(current) + parseInt(1) -%>">Next</a></button>
+  <% } %>
+</div>
 
 <script>
 
