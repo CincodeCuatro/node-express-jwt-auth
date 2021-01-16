@@ -23,7 +23,7 @@ nav{
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  margin-bottom: 120px;
+  margin-bottom: 40px;
 }
 nav ul{
   display: flex;
@@ -42,7 +42,8 @@ nav li a{
 }
 .btn{
   border-radius: 36px;
-  background: #FEE996;
+  background: #cc0bb2;
+  color: white;
 }
 form h2{
   font-size: 2.4em;
@@ -71,7 +72,7 @@ label{
 button{
   margin-top: 30px;
   border-radius: 36px;
-  background: #FEE996;
+  background: #cc0bb2;
   border:0;
   text-transform: uppercase;
   font-weight: 700;
@@ -79,6 +80,7 @@ button{
   display: block;
   padding: 10px 16px;
   letter-spacing: 2px;
+ 
 }
 .error{
   color: #ff0099;
@@ -122,20 +124,20 @@ footer{
 td {
   border: 1px solid #ddd;
   padding: 8px;
+  width: 800px;
 }
 
 th {
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: left;
-  background-color: #4CAF50;
+  background-color: #f9b122;
   color: white;
 }
 
 tr:nth-child(even){background-color: #f2f2f2;}
 
 tr:hover {background-color: #ddd;}
-
 
 
 ul.pagination
@@ -176,3 +178,5 @@ ul.pagination li a:hover:not(.active) {color: white; background-color: #4CAF50;}
   gap: 12px;
   
 }
+
+

@@ -1,7 +1,7 @@
 <%- include('partials/header'); -%>
 
 <header>
-  <div class="smoothie">
+  <div class="uni-main">
    <!-- <img src="/image.png" alt=""> -->
   </div>
   <div class="headings">
@@ -12,10 +12,10 @@
 
 <table class="table table-striped">
   <tr class="bg-info">
-    <th class="bg-info" data-column="first" data-order="desc">Author</th>
-    <th data-column="Last" data-order="desc">Question</th>
-    <th data-column="email" data-order="desc">Category</th>
-    <th data-column="answercount" data-order="desc">Count</th>
+    <th class="bg-info" data-column="first" data-order="desc"><p>Author</p></th>
+    <th data-column="Last" data-order="desc"><p>Question</p></th>
+    <th data-column="email" data-order="desc"><p>Category</p></th>
+    <th data-column="answercount" data-order="desc"><p>Count</p></th>
   </tr>
   <tbody id="questionTable">
   </tbody>
@@ -49,12 +49,12 @@
     
     for (var i = 0; i < data.length; i++) {
       const row = `<tr>
-                      <td>${data[i].author}</td>
-                      <td>
+                      <td><p>${data[i].author}</p></td>
+                      <td><p>
                         <a href="/question/${data[i]._id}">${data[i].question}</a>
-                      </td>
-                      <td>${data[i].category}</td>
-                      <td>${data[i].answerCount}</td>
+                      </p></td>
+                      <td><p>${data[i].category}</p></td>
+                      <td><p>${data[i].answerCount}</p></td>
 					      </tr>`
 
     table.innerHTML += row
